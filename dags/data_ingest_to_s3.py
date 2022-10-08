@@ -30,7 +30,7 @@ ingestion_workflow = DAG(
 )
 #downloading the data 
 with ingestion_workflow:
-    wget_task = BashOperator(
+    download_task = BashOperator(
         task_id = "download_data",
         bash_command = f"curl -sSL {URL_TEMPLATE} > {OUTPUT_FILE_TEMPLATE}"
     )
@@ -46,4 +46,4 @@ with ingestion_workflow:
         }
     )
 
-    wget_task >> ingest_task
+    download_task >> ingest_task
